@@ -61,6 +61,7 @@ namespace la.mat3 {
             );
     }
 
+    // dest = a * b
     export function multiply(a: Float32Array, b: Float32Array, dest?: Float32Array): Float32Array {
         if (!dest) dest = a;
         var a11 = a[0], a12 = a[1],
@@ -76,8 +77,8 @@ namespace la.mat3 {
         dest[2] = a21 * b11 + a22 * b21;
         dest[3] = a21 * b12 + a22 * b22;
 
-        dest[4] = ax0 * b11 + ay0 * b21 + bx0;
-        dest[5] = ax0 * b12 + ay0 * b22 + by0;
+        dest[4] = a11 * bx0 + a12 * by0 + ax0;
+        dest[5] = a21 * bx0 + a22 * by0 + ay0;
 
         return dest;
     }
@@ -93,9 +94,15 @@ namespace la.mat3 {
         if (!dest) dest = vec;
         var x = vec[0],
             y = vec[1];
-        dest[0] = (mat[0] * x) + (mat[2] * y) + mat[4];
-        dest[1] = (mat[1] * x) + (mat[3] * y) + mat[5];
+        dest[0] = (mat[0] * x) + (mat[1] * y) + mat[4];
+        dest[1] = (mat[2] * x) + (mat[3] * y) + mat[5];
         return dest;
+    }
+
+    export function transformVec2s(mat: Float32Array, ...vecs: Float32Array[]) {
+        for (var i = vecs.length - 1; i >= 0; i--) {
+            transformVec2(mat, vecs[i]);
+        }
     }
 
     export function createTranslate(x: number, y: number, dest?: Float32Array): Float32Array {
@@ -142,8 +149,8 @@ namespace la.mat3 {
         var c = Math.cos(angleRad);
         var s = Math.sin(angleRad);
         dest[0] = c;
-        dest[1] = s;
-        dest[2] = -s;
+        dest[1] = -s;
+        dest[2] = s;
         dest[3] = c;
         dest[4] = 0;
         dest[5] = 0;
@@ -153,8 +160,8 @@ namespace la.mat3 {
     export function createSkew(angleRadX: number, angleRadY: number, dest?: Float32Array): Float32Array {
         if (!dest) dest = create();
         dest[0] = 1;
-        dest[1] = Math.tan(angleRadY);
-        dest[2] = Math.tan(angleRadX);
+        dest[1] = Math.tan(angleRadX);
+        dest[2] = Math.tan(angleRadY);
         dest[3] = 1;
         dest[4] = 0;
         dest[5] = 0;
@@ -162,11 +169,11 @@ namespace la.mat3 {
     }
 
     export function preapply(dest: Float32Array, mat: Float32Array): Float32Array {
-        return multiply(mat, dest, dest);
+        return multiply(dest, mat, dest);
     }
 
     export function apply(dest: Float32Array, mat: Float32Array): Float32Array {
-        return multiply(dest, mat, dest);
+        return multiply(mat, dest, dest);
     }
 
     function simple_inverse(mat: Float32Array, dest?: Float32Array): Float32Array {
