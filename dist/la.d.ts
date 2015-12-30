@@ -29,6 +29,7 @@ declare namespace la.mat3 {
     function multiply(a: Float32Array, b: Float32Array, dest?: Float32Array): Float32Array;
     function inverse(mat: Float32Array, dest?: Float32Array): Float32Array;
     function transformVec2(mat: Float32Array, vec: Float32Array, dest?: Float32Array): Float32Array;
+    function transformVec2s(mat: Float32Array, ...vecs: Float32Array[]): void;
     function createTranslate(x: number, y: number, dest?: Float32Array): Float32Array;
     function translate(mat: Float32Array, x: number, y: number): Float32Array;
     function createScale(sx: number, sy: number, dest?: Float32Array): Float32Array;
