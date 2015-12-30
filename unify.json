@@ -1,0 +1,14 @@
+{
+  "name": "la",
+  "client": {},
+  "type": "lib",
+  "dist": "dist/la",
+  "library": {
+    "type": "export",
+    "exports": "la"
+  },
+  "themes": "none",
+  "typings": [
+    "dist/la.d.ts"
+  ]
+}
