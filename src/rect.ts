@@ -128,6 +128,13 @@ namespace la.rect {
         return true;
     }
 
+    export function containsPoint(rect1: IRect, p: IPoint): boolean {
+        return rect1.x <= p.x
+            && rect1.y <= p.y
+            && (rect1.x + rect1.width) >= p.x
+            && (rect1.y + rect1.height) >= p.y;
+    }
+
     export function roundOut(dest: IRect) {
         var x = Math.floor(dest.x);
         var y = Math.floor(dest.y);
@@ -146,4 +153,5 @@ namespace la.rect {
         dest.y = y;
         return dest;
     }
+
 }

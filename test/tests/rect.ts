@@ -137,4 +137,17 @@ namespace la.rect.tests {
         rect.roundIn(r);
         deepEqual(r, rect.init(1, 1, 99, 199));
     });
+
+    QUnit.test("containsPoint", () => {
+        var r = rect.init(0, 0, 100, 100);
+        ok(rect.containsPoint(r, {x: 0, y: 0}));
+        ok(rect.containsPoint(r, {x: 100, y: 0}));
+        ok(rect.containsPoint(r, {x: 0, y: 100}));
+        ok(rect.containsPoint(r, {x: 100, y: 100}));
+        ok(rect.containsPoint(r, {x: 25, y: 75}));
+        ok(!rect.containsPoint(r, {x: -25, y: 75}));
+        ok(!rect.containsPoint(r, {x: 25, y: -75}));
+        ok(!rect.containsPoint(r, {x: 125, y: 75}));
+        ok(!rect.containsPoint(r, {x: 25, y: 125}));
+    });
 }
