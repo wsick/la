@@ -1,15 +1,35 @@
 {
   "name": "la",
+  "description": "Linear algebra library",
   "version": "0.1.0",
   "ignore": [
     "gulp",
     "test",
-    "testsite",
     "typings",
-    "gulpfile.js"
+    "gulpfile.js",
+    "**/.*",
+    "node_modules",
+    "lib",
+    "tests"
   ],
   "dependencies": {},
   "devDependencies": {
     "qunit": "~1.20.0"
-  }
+  },
+  "homepage": "https://github.com/wsick/la",
+  "authors": [
+    "Brad Sickles <brad.sickles@gmail.com>"
+  ],
+  "main": "dist/la.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "linear-algebra",
+    "matrix",
+    "vector",
+    "rect",
+    "size"
+  ],
+  "license": "MIT"
 }
