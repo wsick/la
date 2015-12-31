@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.1.0';
+    la.version = '0.1.1';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -399,6 +399,80 @@ var la;
                 && r1.height === r2.height;
         }
         rect.equal = equal;
+        function isEmpty(src) {
+            return src.width === 0
+                || src.height === 0;
+        }
+        rect.isEmpty = isEmpty;
+        function union(r1, r2, dest) {
+            if (!dest)
+                dest = r1;
+            if (r2.width <= 0 || r2.height <= 0)
+                return dest;
+            if (dest.width <= 0 || dest.height <= 0)
+                return rect.copyTo(r2, dest);
+            var x1 = r1.x, x2 = r2.x, y1 = r1.y, y2 = r2.y, w1 = r1.width, w2 = r2.width, h1 = r1.height, h2 = r2.height;
+            dest.x = Math.min(x1, x2);
+            dest.y = Math.min(y1, y2);
+            dest.width = Math.max(x1 + w1, x2 + w2) - dest.x;
+            dest.height = Math.max(y1 + h1, y2 + h2) - dest.y;
+            return dest;
+        }
+        rect.union = union;
+        function intersection(r1, r2, dest) {
+            if (!dest)
+                dest = r1;
+            var x = Math.max(r1.x, r2.x);
+            var y = Math.max(r1.y, r2.y);
+            dest.width = Math.max(0, Math.min(r1.x + r1.width, r2.x + r2.width) - x);
+            dest.height = Math.max(0, Math.min(r1.y + r1.height, r2.y + r2.height) - y);
+            dest.x = x;
+            dest.y = y;
+            return dest;
+        }
+        rect.intersection = intersection;
+        function isContainedIn(src, test) {
+            var sl = src.x;
+            var st = src.y;
+            var sr = src.x + src.width;
+            var sb = src.y + src.height;
+            var tl = test.x;
+            var tt = test.y;
+            var tr = test.x + test.width;
+            var tb = test.y + test.height;
+            if (sl < tl || st < tt || sl > tr || st > tb)
+                return false;
+            if (sr < tl || sb < tt || sr > tr || sb > tb)
+                return false;
+            return true;
+        }
+        rect.isContainedIn = isContainedIn;
+        function containsPoint(rect1, p) {
+            return rect1.x <= p.x
+                && rect1.y <= p.y
+                && (rect1.x + rect1.width) >= p.x
+                && (rect1.y + rect1.height) >= p.y;
+        }
+        rect.containsPoint = containsPoint;
+        function roundOut(dest) {
+            var x = Math.floor(dest.x);
+            var y = Math.floor(dest.y);
+            dest.width = Math.ceil(dest.x + dest.width) - x;
+            dest.height = Math.ceil(dest.y + dest.height) - y;
+            dest.x = x;
+            dest.y = y;
+        }
+        rect.roundOut = roundOut;
+        function roundIn(dest) {
+            var x = Math.ceil(dest.x);
+            var y = Math.ceil(dest.y);
+            dest.width = Math.floor(dest.x + dest.width) - x;
+            dest.height = Math.floor(dest.y + dest.height) - y;
+            dest.x = x;
+            dest.y = y;
+            return dest;
+        }
+        rect.roundIn = roundIn;
     })(rect = la.rect || (la.rect = {}));
 })(la || (la = {}));
 

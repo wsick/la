@@ -56,4 +56,11 @@ declare namespace la.rect {
     function copyTo(src: IRect, dest?: IRect): IRect;
     function transform(src: IRect, transform: Float32Array, dest?: IRect): IRect;
     function equal(r1: IRect, r2: IRect): boolean;
+    function isEmpty(src: IRect): boolean;
+    function union(r1: IRect, r2: IRect, dest?: IRect): IRect;
+    function intersection(r1: IRect, r2: IRect, dest?: IRect): IRect;
+    function isContainedIn(src: IRect, test: IRect): boolean;
+    function containsPoint(rect1: IRect, p: IPoint): boolean;
+    function roundOut(dest: IRect): void;
+    function roundIn(dest: IRect): IRect;
 }
