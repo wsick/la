@@ -72,4 +72,36 @@ namespace la.rect {
             && r1.width === r2.width
             && r1.height === r2.height;
     }
+
+    // NOTE: If dest is not specified, r1 will be used dest
+    export function union(r1: IRect, r2: IRect, dest?: IRect): IRect {
+        if (!dest) dest = r1;
+        if (r2.width <= 0 || r2.height <= 0)
+            return dest;
+        if (dest.width <= 0 || dest.height <= 0)
+            return rect.copyTo(r2, dest);
+
+        var x1 = r1.x, x2 = r2.x,
+            y1 = r1.y, y2 = r2.y,
+            w1 = r1.width, w2 = r2.width,
+            h1 = r1.height, h2 = r2.height;
+
+        dest.x = Math.min(x1, x2);
+        dest.y = Math.min(y1, y2);
+        dest.width = Math.max(x1 + w1, x2 + w2) - dest.x;
+        dest.height = Math.max(y1 + h1, y2 + h2) - dest.y;
+        return dest;
+    }
+
+    // NOTE: If dest is not specified, r1 will be used dest
+    export function intersection(r1: IRect, r2: IRect, dest?: IRect): IRect {
+        if (!dest) dest = r1;
+        var x = Math.max(r1.x, r2.x);
+        var y = Math.max(r1.y, r2.y);
+        dest.width = Math.max(0, Math.min(r1.x + r1.width, r2.x + r2.width) - x);
+        dest.height = Math.max(0, Math.min(r1.y + r1.height, r2.y + r2.height) - y);
+        dest.x = x;
+        dest.y = y;
+        return dest;
+    }
 }

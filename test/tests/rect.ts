@@ -49,4 +49,56 @@ namespace la.rect.tests {
         rect.init(2, 2, 3, 4, r2);
         ok(!rect.equal(r1, r2));
     });
+
+    QUnit.test("intersection", () => {
+        var r1 = rect.init(0, 0, 100, 100);
+        var r2 = rect.init(50, 50, 100, 100);
+        var dest = rect.intersection(r1, r2);
+        deepEqual(r1, rect.init(50, 50, 50, 50), "r1 should be the intersection");
+        deepEqual(r2, rect.init(50, 50, 100, 100), "r2 should remain unchanged");
+        strictEqual(r1, dest);
+
+        rect.init(0, 0, 100, 100, r1);
+        rect.init(50, 50, 25, 25, r2);
+        dest = rect.intersection(r1, r2);
+        deepEqual(r1, rect.init(50, 50, 25, 25), "r1 should be the intersection");
+        deepEqual(r2, rect.init(50, 50, 25, 25), "r2 should remain unchanged");
+        strictEqual(r1, dest);
+
+        rect.init(50, 50, 25, 25, r1);
+        rect.init(0, 0, 100, 100, r2);
+        dest = rect.intersection(r1, r2);
+        deepEqual(r1, rect.init(50, 50, 25, 25), "r1 should be the intersection");
+        deepEqual(r2, rect.init(0, 0, 100, 100), "r2 should remain unchanged");
+        strictEqual(r1, dest);
+
+        rect.init(50, 50, 25, 25, r1);
+        rect.init(0, 0, 100, 100, r2);
+        dest = rect.init(0, 0, 0, 0);
+        var dest2 = rect.intersection(r1, r2, dest);
+        strictEqual(dest, dest2, "input dest should be the same ref as output");
+        notStrictEqual(r1, dest, "first input rect should not be used as output");
+    });
+
+    QUnit.test("union", () => {
+        var r1 = rect.init(0, 0, 0, 0);
+        var r2 = rect.init(0, 0, 100, 100);
+        rect.union(r1, r2);
+        deepEqual(r1, rect.init(0, 0, 100, 100));
+
+        rect.init(50, 50, 100, 100, r1);
+        rect.init(0, 0, 0, 0, r2);
+        rect.union(r1, r2);
+        deepEqual(r1, rect.init(50, 50, 100, 100));
+
+        rect.init(50, 50, 100, 100, r1);
+        rect.init(75, 75, 100, 100, r2);
+        rect.union(r1, r2);
+        deepEqual(r1, rect.init(50, 50, 125, 125));
+
+        rect.init(50, 50, 100, 100, r1);
+        rect.init(0, 0, 200, 100, r2);
+        rect.union(r1, r2);
+        deepEqual(r1, rect.init(0, 0, 200, 150));
+    });
 }
