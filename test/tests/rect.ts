@@ -50,6 +50,20 @@ namespace la.rect.tests {
         ok(!rect.equal(r1, r2));
     });
 
+    QUnit.test("isEmpty", (assert) => {
+        var r1 = rect.init(0, 0, 0, 0);
+        assert.ok(rect.isEmpty(r1));
+
+        rect.init(1, 1, 1, 0, r1);
+        assert.ok(rect.isEmpty(r1));
+
+        rect.init(1, 1, 0, 1, r1);
+        assert.ok(rect.isEmpty(r1));
+
+        rect.init(1, 1, 1, 1, r1);
+        assert.ok(!rect.isEmpty(r1));
+    });
+
     QUnit.test("intersection", () => {
         var r1 = rect.init(0, 0, 100, 100);
         var r2 = rect.init(50, 50, 100, 100);
@@ -100,5 +114,27 @@ namespace la.rect.tests {
         rect.init(0, 0, 200, 100, r2);
         rect.union(r1, r2);
         deepEqual(r1, rect.init(0, 0, 200, 150));
+    });
+
+    QUnit.test("isContainedIn", () => {
+        var r1 = rect.init(0, 0, 100, 100);
+        var r2 = rect.init(50, 50, 25, 25);
+        ok(!rect.isContainedIn(r1, r2));
+
+        rect.init(50, 50, 25, 25, r1);
+        rect.init(0, 0, 100, 100, r2);
+        ok(rect.isContainedIn(r1, r2));
+    });
+
+    QUnit.test("roundOut", () => {
+        var r = rect.init(0.25, 0.75, 100.4, 199.8);
+        rect.roundOut(r);
+        deepEqual(r, rect.init(0, 0, 101, 201));
+    });
+
+    QUnit.test("roundIn", () => {
+        var r = rect.init(0.25, 0.75, 100.4, 199.8);
+        rect.roundIn(r);
+        deepEqual(r, rect.init(1, 1, 99, 199));
     });
 }

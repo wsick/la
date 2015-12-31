@@ -73,6 +73,11 @@ namespace la.rect {
             && r1.height === r2.height;
     }
 
+    export function isEmpty(src: IRect): boolean {
+        return src.width === 0
+            || src.height === 0;
+    }
+
     // NOTE: If dest is not specified, r1 will be used dest
     export function union(r1: IRect, r2: IRect, dest?: IRect): IRect {
         if (!dest) dest = r1;
@@ -100,6 +105,43 @@ namespace la.rect {
         var y = Math.max(r1.y, r2.y);
         dest.width = Math.max(0, Math.min(r1.x + r1.width, r2.x + r2.width) - x);
         dest.height = Math.max(0, Math.min(r1.y + r1.height, r2.y + r2.height) - y);
+        dest.x = x;
+        dest.y = y;
+        return dest;
+    }
+
+    export function isContainedIn(src: IRect, test: IRect): boolean {
+        var sl = src.x;
+        var st = src.y;
+        var sr = src.x + src.width;
+        var sb = src.y + src.height;
+
+        var tl = test.x;
+        var tt = test.y;
+        var tr = test.x + test.width;
+        var tb = test.y + test.height;
+
+        if (sl < tl || st < tt || sl > tr || st > tb) //src top-left is outside test
+            return false;
+        if (sr < tl || sb < tt || sr > tr || sb > tb) //src bottom-right is outside test
+            return false;
+        return true;
+    }
+
+    export function roundOut(dest: IRect) {
+        var x = Math.floor(dest.x);
+        var y = Math.floor(dest.y);
+        dest.width = Math.ceil(dest.x + dest.width) - x;
+        dest.height = Math.ceil(dest.y + dest.height) - y;
+        dest.x = x;
+        dest.y = y;
+    }
+
+    export function roundIn(dest: IRect) {
+        var x = Math.ceil(dest.x);
+        var y = Math.ceil(dest.y);
+        dest.width = Math.floor(dest.x + dest.width) - x;
+        dest.height = Math.floor(dest.y + dest.height) - y;
         dest.x = x;
         dest.y = y;
         return dest;
