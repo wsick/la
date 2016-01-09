@@ -56,6 +56,18 @@ namespace la.vec2 {
         return dest;
     }
 
+    /// Computes the midpoint between 2 points
+    export function midpoint(p1: Float32Array, p2: Float32Array, dest?: Float32Array): Float32Array {
+        if (!dest) dest = p1;
+        var x1 = p1[0],
+            y1 = p1[1],
+            x2 = p2[0],
+            y2 = p2[1];
+        dest[0] = (x1 - x2) / 2.0;
+        dest[1] = (y1 - y2) / 2.0;
+        return dest;
+    }
+
     /// Returns smallest angle (in radians) between 2 vectors
     export function angleBetween(u: Float32Array, v: Float32Array): number {
         var ux = u[0],
