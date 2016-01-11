@@ -63,8 +63,8 @@ namespace la.vec2 {
             y1 = p1[1],
             x2 = p2[0],
             y2 = p2[1];
-        dest[0] = (x1 - x2) / 2.0;
-        dest[1] = (y1 - y2) / 2.0;
+        dest[0] = (x1 + x2) / 2.0;
+        dest[1] = (y1 + y2) / 2.0;
         return dest;
     }
 

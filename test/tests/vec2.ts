@@ -61,6 +61,15 @@ namespace la.vec2.tests {
         deepEqual(toArray(v), [-3, -6]);
     });
 
+    QUnit.test("midpoint", () => {
+        var v = vec2.midpoint(vec2.create(1, 5), vec2.create(10, -1));
+        deepEqual(toArray(v), [5.5, 2]);
+
+        var dest = vec2.midpoint(v, vec2.create(1.5, 1));
+        strictEqual(v, dest);
+        deepEqual(toArray(v), [3.5, 1.5]);
+    });
+
     QUnit.test("angleBetween", () => {
         var theta = vec2.angleBetween(vec2.create(1, 0), vec2.create(Math.SQRT2 / 2, Math.SQRT2 / 2));
         ok(close(theta, Math.PI / 4));
