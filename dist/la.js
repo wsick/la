@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.1.1';
+    la.version = '0.1.2';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -291,6 +291,15 @@ var la;
             return dest;
         }
         vec2.rotate = rotate;
+        function midpoint(p1, p2, dest) {
+            if (!dest)
+                dest = p1;
+            var x1 = p1[0], y1 = p1[1], x2 = p2[0], y2 = p2[1];
+            dest[0] = (x1 + x2) / 2.0;
+            dest[1] = (y1 + y2) / 2.0;
+            return dest;
+        }
+        vec2.midpoint = midpoint;
         function angleBetween(u, v) {
             var ux = u[0], uy = u[1], vx = v[0], vy = v[1];
             var num = ux * vx + uy * vy;

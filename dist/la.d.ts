@@ -47,6 +47,7 @@ declare namespace la.vec2 {
     function orthogonal(src: Float32Array, dest?: Float32Array): Float32Array;
     function normalize(src: Float32Array, dest?: Float32Array): Float32Array;
     function rotate(src: Float32Array, theta: number, dest?: Float32Array): Float32Array;
+    function midpoint(p1: Float32Array, p2: Float32Array, dest?: Float32Array): Float32Array;
     function angleBetween(u: Float32Array, v: Float32Array): number;
     function isClockwiseTo(v1: Float32Array, v2: Float32Array): boolean;
     function intersection(s1: Float32Array, d1: Float32Array, s2: Float32Array, d2: Float32Array): Float32Array;
