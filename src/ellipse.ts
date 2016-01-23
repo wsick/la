@@ -14,6 +14,9 @@ namespace la {
         normal(theta: number): Float32Array;
         tangent(theta: number): Float32Array;
         /// Find ellipse extrema within arc defined by [start angle, end angle] sweeping anti-clockwise/clockwise
+        /// [0] and [1] will be vertical tangents
+        /// [2] and [3] will be horizontal tangents
+        /// If not contained within arc, points will be null
         extrema(sa: number, ea: number, ac: boolean): Float32Array[];
     }
     export function ellipse(cx: number, cy: number, rx: number, ry: number, phi: number): IEllipse {
@@ -100,16 +103,12 @@ namespace la {
                 }
 
                 var [va1, va2, ha1, ha2] = flatTangentAngles();
-                var ext = [];
-                if (isContained(va1))
-                    ext.push(e.point(va1));
-                if (isContained(va2))
-                    ext.push(e.point(va2));
-                if (isContained(ha1))
-                    ext.push(e.point(ha1));
-                if (isContained(ha2))
-                    ext.push(e.point(ha2));
-                return ext;
+                return [
+                    (isContained(va1)) ? e.point(va1) : null,
+                    (isContained(va2)) ? e.point(va2) : null,
+                    (isContained(ha1)) ? e.point(ha1) : null,
+                    (isContained(ha2)) ? e.point(ha2) : null,
+                ];
             }
         };
         return e;

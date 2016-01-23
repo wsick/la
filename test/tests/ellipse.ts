@@ -47,22 +47,28 @@ namespace la.ellipse.tests {
 
     QUnit.test("extrema (constrained cw)", () => {
         var ext = ell1.extrema(0, 3 * Math.PI / 4, false);
-        equal(ext.length, 2, "#1 count");
-        closePoint(ext[0], vec2.create(100, 0), "#1 (vert)");
-        closePoint(ext[1], vec2.create(0, 100), "#1 (hori)");
+        equal(ext.length, 4, "#1 count");
+        closePoint(ext[0], vec2.create(100, 0), "#1 (vert 1)");
+        equal(ext[1], null, "#1 (vert 2)");
+        closePoint(ext[2], vec2.create(0, 100), "#1 (hori 1)");
+        equal(ext[3], null, "#1 (hori 2)");
     });
 
     QUnit.test("extrema (constrained ccw - neg ea)", () => {
         var ext = ell1.extrema(-Math.PI / 4, -Math.PI, true);
-        equal(ext.length, 2, "#1 count");
-        closePoint(ext[0], vec2.create(-100, 0), "#1 (vert)");
-        closePoint(ext[1], vec2.create(0, -100), "#1 (hori)");
+        equal(ext.length, 4, "#1 count");
+        equal(ext[0], null, "#1 (vert 1)");
+        closePoint(ext[1], vec2.create(-100, 0), "#1 (vert 2)");
+        equal(ext[2], null, "#1 (hori 1)");
+        closePoint(ext[3], vec2.create(0, -100), "#1 (hori 2)");
     });
 
     QUnit.test("extrema (constrained ccw - pos ea)", () => {
         var ext = ell1.extrema(7 * Math.PI / 4, Math.PI, true);
-        equal(ext.length, 2, "#1 count");
-        closePoint(ext[0], vec2.create(-100, 0), "#1 (vert)");
-        closePoint(ext[1], vec2.create(0, -100), "#1 (hori)");
+        equal(ext.length, 4, "#1 count");
+        equal(ext[0], null, "#1 (vert 1)");
+        closePoint(ext[1], vec2.create(-100, 0), "#1 (vert 2)");
+        equal(ext[2], null, "#1 (hori 1)");
+        closePoint(ext[3], vec2.create(0, -100), "#1 (hori 2)");
     });
 }
