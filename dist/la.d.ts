@@ -2,6 +2,22 @@ declare module la {
     var version: string;
 }
 declare namespace la {
+    interface IEllipse {
+        cx: number;
+        cy: number;
+        rx: number;
+        ry: number;
+        phi: number;
+        x(theta: number): number;
+        y(theta: number): number;
+        point(theta: number): Float32Array;
+        normal(theta: number): Float32Array;
+        tangent(theta: number): Float32Array;
+        extrema(sa: number, ea: number, ac: boolean): Float32Array[];
+    }
+    function ellipse(cx: number, cy: number, rx: number, ry: number, phi: number): IEllipse;
+}
+declare namespace la {
     var EPSILON: number;
 }
 declare namespace la {
