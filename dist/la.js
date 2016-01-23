@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.1.3';
+    la.version = '0.2.0';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -78,16 +78,12 @@ var la;
                     }
                 }
                 var _a = flatTangentAngles(), va1 = _a[0], va2 = _a[1], ha1 = _a[2], ha2 = _a[3];
-                var ext = [];
-                if (isContained(va1))
-                    ext.push(e.point(va1));
-                if (isContained(va2))
-                    ext.push(e.point(va2));
-                if (isContained(ha1))
-                    ext.push(e.point(ha1));
-                if (isContained(ha2))
-                    ext.push(e.point(ha2));
-                return ext;
+                return [
+                    (isContained(va1)) ? e.point(va1) : null,
+                    (isContained(va2)) ? e.point(va2) : null,
+                    (isContained(ha1)) ? e.point(ha1) : null,
+                    (isContained(ha2)) ? e.point(ha2) : null,
+                ];
             }
         };
         return e;
