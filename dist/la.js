@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.2.0';
+    la.version = '0.2.1';
 })(la || (la = {}));
 var la;
 (function (la) {
