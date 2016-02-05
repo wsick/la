@@ -20,7 +20,7 @@ module.exports = function (meta) {
                 declaration: true,
                 pathFilter: {'test/tests': 'tests'}
             }))
-            .pipe(sourcemaps.write({sourceRoot: './src'}))
+            .pipe(sourcemaps.write('./', {sourceRoot: './test', debug: true}))
             .pipe(gulp.dest('test/.build'));
     });
 
