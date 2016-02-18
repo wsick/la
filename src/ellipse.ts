@@ -84,6 +84,7 @@ namespace la {
                 );
             },
             extrema(sa: number, ea: number, ac: boolean): Float32Array[] {
+                var da = ea - sa;
                 var sa = normalizeAngle(sa);
                 var ea = normalizeAngle(ea);
 
@@ -94,11 +95,17 @@ namespace la {
                     } else {
                         isContained = (theta) => sa <= theta && theta <= ea;
                     }
-                } else {
+                } else if (sa > ea) {
                     if (ac === true) {
                         isContained = (theta) => ea <= theta && theta <= sa;
                     } else {
                         isContained = (theta) => (0 <= theta && theta <= ea) || (sa <= theta && theta <= PI2);
+                    }
+                } else {
+                    if (da > 0) {
+                        isContained = (theta) => true;
+                    } else {
+                        isContained = (theta) => false;
                     }
                 }
 

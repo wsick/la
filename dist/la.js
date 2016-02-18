@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.2.1';
+    la.version = '0.2.2';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -58,6 +58,7 @@ var la;
                 return la.vec2.create((-da * stheta) + (db * ctheta), (-dc * stheta) + (dd * ctheta));
             },
             extrema: function (sa, ea, ac) {
+                var da = ea - sa;
                 var sa = normalizeAngle(sa);
                 var ea = normalizeAngle(ea);
                 var isContained;
@@ -69,12 +70,20 @@ var la;
                         isContained = function (theta) { return sa <= theta && theta <= ea; };
                     }
                 }
-                else {
+                else if (sa > ea) {
                     if (ac === true) {
                         isContained = function (theta) { return ea <= theta && theta <= sa; };
                     }
                     else {
                         isContained = function (theta) { return (0 <= theta && theta <= ea) || (sa <= theta && theta <= PI2); };
+                    }
+                }
+                else {
+                    if (da > 0) {
+                        isContained = function (theta) { return true; };
+                    }
+                    else {
+                        isContained = function (theta) { return false; };
                     }
                 }
                 var _a = flatTangentAngles(), va1 = _a[0], va2 = _a[1], ha1 = _a[2], ha2 = _a[3];
