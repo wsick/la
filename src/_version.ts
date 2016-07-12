@@ -1,3 +1,3 @@
 module la {
-    export var version = '0.2.2';
+    export var version = '0.2.3';
 }

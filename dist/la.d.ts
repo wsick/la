@@ -21,6 +21,14 @@ declare namespace la {
     var EPSILON: number;
 }
 declare namespace la {
+    interface IPadding {
+        left: number;
+        top: number;
+        right: number;
+        bottom: number;
+    }
+}
+declare namespace la {
     interface IPoint {
         x: number;
         y: number;
@@ -80,4 +88,6 @@ declare namespace la.rect {
     function containsPoint(rect1: IRect, p: IPoint): boolean;
     function roundOut(dest: IRect): void;
     function roundIn(dest: IRect): IRect;
+    function grow(src: IRect, padding: IPadding, dest?: IRect): void;
+    function shrink(src: IRect, padding: IPadding, dest?: IRect): void;
 }

@@ -154,4 +154,21 @@ namespace la.rect {
         return dest;
     }
 
+    // NOTE: If dest is not specified, src will be used for dest
+    export function grow(src: IRect, padding: IPadding, dest?: IRect) {
+        if (!dest) dest = src;
+        dest.x -= padding.left;
+        dest.y -= padding.top;
+        dest.width += padding.left + padding.right;
+        dest.height += padding.top + padding.bottom;
+    }
+
+    // NOTE: If dest is not specified, src will be used for dest
+    export function shrink(src: IRect, padding: IPadding, dest?: IRect) {
+        if (!dest) dest = src;
+        dest.x += padding.left;
+        dest.y += padding.top;
+        dest.width -= padding.left + padding.right;
+        dest.height -= padding.top + padding.bottom;
+    }
 }
