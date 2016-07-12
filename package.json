@@ -1,6 +1,6 @@
 {
   "name": "la",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "gulpfile.js",
   "devDependencies": {
     "bower-typings": "^0.1.0",

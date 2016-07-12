@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.2.3';
+    la.version = '0.2.4';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -325,6 +325,54 @@ var la;
             return dest;
         }
     })(mat3 = la.mat3 || (la.mat3 = {}));
+})(la || (la = {}));
+var la;
+(function (la) {
+    var padding;
+    (function (padding) {
+        function init(l, t, r, b, dest) {
+            if (!dest)
+                return { left: l, top: t, right: r, bottom: b };
+            dest.left = l;
+            dest.top = t;
+            dest.right = r;
+            dest.bottom = b;
+            return dest;
+        }
+        padding.init = init;
+        function copyTo(src, dest) {
+            if (!dest) {
+                return {
+                    left: src.left,
+                    top: src.top,
+                    right: src.right,
+                    bottom: src.bottom
+                };
+            }
+            else {
+                dest.left = src.left;
+                dest.top = src.top;
+                dest.right = src.right;
+                dest.bottom = src.bottom;
+                return dest;
+            }
+        }
+        padding.copyTo = copyTo;
+        function equal(r1, r2) {
+            return r1.left === r2.left
+                && r1.top === r2.top
+                && r1.right === r2.right
+                && r1.bottom === r2.bottom;
+        }
+        padding.equal = equal;
+        function isEmpty(src) {
+            return src.left === 0
+                && src.top === 0
+                && src.right === 0
+                && src.bottom === 0;
+        }
+        padding.isEmpty = isEmpty;
+    })(padding = la.padding || (la.padding = {}));
 })(la || (la = {}));
 var la;
 (function (la) {
