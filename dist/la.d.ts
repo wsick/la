@@ -63,6 +63,12 @@ declare namespace la.mat3 {
     function preapply(dest: Float32Array, mat: Float32Array): Float32Array;
     function apply(dest: Float32Array, mat: Float32Array): Float32Array;
 }
+declare namespace la.padding {
+    function init(l: number, t: number, r: number, b: number, dest?: IPadding): IPadding;
+    function copyTo(src: IPadding, dest?: IPadding): IPadding;
+    function equal(r1: IPadding, r2: IPadding): boolean;
+    function isEmpty(src: IPadding): boolean;
+}
 declare namespace la.vec2 {
     function create(x: number, y: number): Float32Array;
     function init(x: number, y: number, dest?: Float32Array): Float32Array;

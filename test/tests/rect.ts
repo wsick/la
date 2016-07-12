@@ -52,16 +52,16 @@ namespace la.rect.tests {
 
     QUnit.test("isEmpty", (assert) => {
         var r1 = rect.init(0, 0, 0, 0);
-        assert.ok(rect.isEmpty(r1));
+        ok(rect.isEmpty(r1));
 
         rect.init(1, 1, 1, 0, r1);
-        assert.ok(rect.isEmpty(r1));
+        ok(rect.isEmpty(r1));
 
         rect.init(1, 1, 0, 1, r1);
-        assert.ok(rect.isEmpty(r1));
+        ok(rect.isEmpty(r1));
 
         rect.init(1, 1, 1, 1, r1);
-        assert.ok(!rect.isEmpty(r1));
+        ok(!rect.isEmpty(r1));
     });
 
     QUnit.test("intersection", () => {
