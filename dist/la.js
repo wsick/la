@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.2.2';
+    la.version = '0.2.3';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -579,6 +579,24 @@ var la;
             return dest;
         }
         rect.roundIn = roundIn;
+        function grow(src, padding, dest) {
+            if (!dest)
+                dest = src;
+            dest.x -= padding.left;
+            dest.y -= padding.top;
+            dest.width += padding.left + padding.right;
+            dest.height += padding.top + padding.bottom;
+        }
+        rect.grow = grow;
+        function shrink(src, padding, dest) {
+            if (!dest)
+                dest = src;
+            dest.x += padding.left;
+            dest.y += padding.top;
+            dest.width -= padding.left + padding.right;
+            dest.height -= padding.top + padding.bottom;
+        }
+        rect.shrink = shrink;
     })(rect = la.rect || (la.rect = {}));
 })(la || (la = {}));
 

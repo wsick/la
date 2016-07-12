@@ -150,4 +150,16 @@ namespace la.rect.tests {
         ok(!rect.containsPoint(r, {x: 125, y: 75}));
         ok(!rect.containsPoint(r, {x: 25, y: 125}));
     });
+
+    QUnit.test("grow", () => {
+        var r = rect.init(0, 0, 100, 100);
+        rect.grow(r, {left: 5, top: 10, right: 15, bottom: 20});
+        deepEqual(r, {x: -5, y: -10, width: 120, height: 130});
+    });
+
+    QUnit.test("shrink", () => {
+        var r = rect.init(0, 0, 100, 100);
+        rect.shrink(r, {left: 5, top: 10, right: 15, bottom: 20});
+        deepEqual(r, {x: 5, y: 10, width: 80, height: 70});
+    });
 }
