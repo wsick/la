@@ -135,6 +135,15 @@ namespace la.rect {
             && (rect1.y + rect1.height) >= p.y;
     }
 
+    export function containsVec2(rect1: IRect, v: Float32Array): boolean {
+        var vx = v[0],
+            vy = v[1];
+        return rect1.x <= vx
+            && rect1.y <= vy
+            && (rect1.x + rect1.width) >= vx
+            && (rect1.y + rect1.height) >= vy;
+    }
+
     export function roundOut(dest: IRect) {
         var x = Math.floor(dest.x);
         var y = Math.floor(dest.y);

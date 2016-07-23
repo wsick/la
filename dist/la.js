@@ -1,6 +1,6 @@
 var la;
 (function (la) {
-    la.version = '0.2.4';
+    la.version = '0.2.5';
 })(la || (la = {}));
 var la;
 (function (la) {
@@ -608,6 +608,14 @@ var la;
                 && (rect1.y + rect1.height) >= p.y;
         }
         rect.containsPoint = containsPoint;
+        function containsVec2(rect1, v) {
+            var vx = v[0], vy = v[1];
+            return rect1.x <= vx
+                && rect1.y <= vy
+                && (rect1.x + rect1.width) >= vx
+                && (rect1.y + rect1.height) >= vy;
+        }
+        rect.containsVec2 = containsVec2;
         function roundOut(dest) {
             var x = Math.floor(dest.x);
             var y = Math.floor(dest.y);

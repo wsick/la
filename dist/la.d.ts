@@ -1,4 +1,4 @@
-declare module la {
+declare namespace la {
     var version: string;
 }
 declare namespace la {
@@ -92,6 +92,7 @@ declare namespace la.rect {
     function intersection(r1: IRect, r2: IRect, dest?: IRect): IRect;
     function isContainedIn(src: IRect, test: IRect): boolean;
     function containsPoint(rect1: IRect, p: IPoint): boolean;
+    function containsVec2(rect1: IRect, v: Float32Array): boolean;
     function roundOut(dest: IRect): void;
     function roundIn(dest: IRect): IRect;
     function grow(src: IRect, padding: IPadding, dest?: IRect): void;
